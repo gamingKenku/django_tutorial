@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <style>
+    table, th, td {
+    border: 1px solid black;
+    }
+    </style>
+</head>
+    <body>
+        {% if user.is_authenticated %}
+            <p>Добро пожаловать, {{user.first_name}}.
+            <input type="button" onclick="location.href='users/logout'" value="Выйти">
+            <input type="button" onclick="location.href='users/profile'" value="Личный кабинет"></p>
+            <p><input type="button" onclick="location.href='add'" value="Добавить новый элемент"></p>
+            <p>В вашей <a href="users/cart">корзине</a>: {{ cart_len }} книг.</p>
+        {% else %}
+            <p>Вы не авторизированы в системе.</p>
+            <input type="button" onclick="location.href='users/login'" value="Войти">
+            <input type="button" onclick="location.href='users/register'" value="Зарегистрироваться">
+        {% endif %}
+        <p>Ниже приведены все имеющиеся на данный момент записи книг:</p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Цена</th>
+                <th>Дата выпуска</th>
+            </tr>
+            {% for book in page_obj %}
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.price|floatformat:2}}</td>
+                    <td>{{book.release_date}}</td>
+                    {% if user.is_staff %}
+                        <td><input type="button" onclick="location.href='redact/{{book.id}}'" value="Редактировать"></td>
+                        <td><input type="button" onclick="location.href='delete/{{book.id}}'" value="Удалить"></td>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <td><input type="button" onclick="location.href='users/cart/add_to_cart/{{book.id}}'" value="Добавить в корзину"></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1"><<</a>
+                    <a href="?page={{ page_obj.previous_page_number }}"><</a>
+                {% endif %}
+
+                <span class="current">
+                    {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">></a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">>></a>
+                {% endif %}
+            </span>
+        </div>
+    </body>
+</html>

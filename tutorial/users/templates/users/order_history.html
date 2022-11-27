@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>История заказов</title>
+    <style>
+    table, th, td {
+    border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+    <p>История заказов пользователя {{ request.user.username }}:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Дата заказа</th>
+                <th>Состав заказа</th>
+                <th>Сумма заказа</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order_record in order_list %}
+                <tr>
+                    <td>{{ order_record.order_date }}</td>
+                    <td>
+                        {% for book in order_record.book_list %}
+                            {{ book }}<br>
+                        {% endfor %}
+                    </td>
+                    <td>{{ order_record.price|floatformat:2 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><input type="button" value="Назад" onclick="location.href='/'"></p>
+</body>
+</html>

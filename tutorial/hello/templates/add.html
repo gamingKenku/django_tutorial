@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление новой записи</title>
+</head>
+<body>
+    <form method="POST"> {% csrf_token %}
+        <p><label for="title">Название</label>
+        <input id="title" type="text" name="title" required></p>
+        <p><label for="price">Цена</label>
+        <input id="price" type="number" name="price" step="0.01" min="0.01" required></p>
+        <p><label for="release_date">Дата выпуска</label>
+        <input id="release_date" type="date" name="release_date" required> </p>
+        <p><label for="author">Автор</label>
+        <input id="author" type="text" name="author" required></p>
+        <input type="submit" value="Сохранить" name="submit">
+    </form>
+    <p><input type="button" onclick="location.href='/'" value="Отмена"></p>
+</body>
+</html>

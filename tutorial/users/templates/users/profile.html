@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.username }}</title>
+</head>
+<body>
+    <p>Данные пользователя {{ user.username }}:</p>
+    <table>
+        <tr>
+            <td><b>Имя пользователя:</b></td>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+            <td><b>Логин:</b></td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td><b>Email:</b></td>
+            <td>{{ user.mail }}</td>
+        </tr>
+    </table>
+    <p>
+        <br> <input type="button" onclick="location.href='/'" value="Назад">
+        <br> <input type="button" onclick="location.href='/users/profile/redact'" value="Изменить данные пользователя">
+        <br> <input type="button" onclick="location.href='/users/profile/change_password'" value="Изменить пароль">
+        <br> <input type="button" onclick="location.href='/users/profile/order_history'" value="Просмотреть историю заказов">
+    </p>
+</body>
+</html>

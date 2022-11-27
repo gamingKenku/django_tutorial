@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование записи</title>
+</head>
+<body>
+    <form method="post" action="">  {% csrf_token %}
+        <p>Введите требуемые поправки:</p>
+        <p><input name="title" type="text" value="{{book.title}}" required></p>
+        <p><input name="author" type="text" value="{{book.author}}" required></p>
+        <p><input name="price" type="number" value="{{book.price}}" step="0.01" min="0.01" required></p>
+        <p><input name="date" type="date" value="{{book.release_date|date:'Y-m-d'}}" required></p>
+        <p><input type="submit" value="Сохранить"> </p>
+    </form>
+    <p><input type="button" onclick="location.href='/'" value="Отмена"></p>
+</body>
+</html>

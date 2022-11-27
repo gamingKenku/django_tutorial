@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <style>
+    table, th, td {
+    border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+    <p>В вашей корзине:</p>
+    <table>
+            <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Цена</th>
+                <th>Дата выпуска</th>
+            </tr>
+            {% for book in books %}
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.price|floatformat:2}}</td>
+                    <td>{{book.release_date}}</td>
+                </tr>
+            {% endfor %}
+    </table>
+    <p>Общая сумма заказа: {{ sum_price|floatformat:2 }}</p>
+    <p><input type="button" onclick="location.href='/users/cart/order'" value="Сделать заказ"></p>
+    <p><input type="button" onclick="location.href='/'" value="Назад"></p>
+</body>
+</html>
