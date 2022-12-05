@@ -68,7 +68,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bookshop',
         'USER': 'webkenku',
-        'PASSWORD': '5789a9321',
+        'PASSWORD': '',
         'HOST': 'webkenku.mysql.pythonanywhere-services.com',
         'PORT': '3306'
     }
